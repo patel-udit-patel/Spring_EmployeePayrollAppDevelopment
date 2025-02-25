@@ -18,4 +18,13 @@ public class EmployeeService {
     public List<Employee> getAllEmployees() {
         return repository.findAll();
     }
+
+    public void deleteEmployee(Long id){
+        List<Employee>emp=repository.findAll();
+        for(int i=0;i< repository.count();i++){
+            if(emp.get(i).getId().equals(id)){
+                repository.delete(emp.get(i));
+            }
+        }
+    }
 }
