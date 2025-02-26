@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Slf4j  // Lombok annotation for logging
 @Service
@@ -22,7 +23,7 @@ public class EmployeeService {
 
     public Employee addEmployee(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
-        employee.setId((long) (repository.count() + 1)); // Dummy ID generation
+        employee.setId((Long) (repository.count() + 1)); // Dummy ID generation
         employee.setName(employeeDTO.getName());
         employee.setSalary(employeeDTO.getSalary());
 
