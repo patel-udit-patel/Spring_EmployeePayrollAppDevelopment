@@ -34,12 +34,12 @@ public class EmployeeController {
         service.deleteEmployee(id);
     }
 
-    @PostMapping("/add")
-    public Employee addEmployee(@RequestBody EmployeeDTO employeeDTO) {
-        // Map DTO to Entity (Employee) and save to DB (or just process the data)
-        return  service.addEmployee(new Employee(employeeDTO.getName(),employeeDTO.getDepartment(),employeeDTO.getSalary()));
-//        return "Employee added: " + employeeDTO.getName() + " with salary " + employeeDTO.getSalary();
-    }
+//    @PostMapping("/add")
+//    public Employee addEmployee(@RequestBody EmployeeDTO employeeDTO) {
+//        // Map DTO to Entity (Employee) and save to DB (or just process the data)
+//        return  service.addEmployee(new Employee(employeeDTO.getName(),employeeDTO.getDepartment(),employeeDTO.getSalary()));
+////        return "Employee added: " + employeeDTO.getName() + " with salary " + employeeDTO.getSalary();
+//    }
 
     @GetMapping("/all")
     public List<Employee> getEmployee() {
