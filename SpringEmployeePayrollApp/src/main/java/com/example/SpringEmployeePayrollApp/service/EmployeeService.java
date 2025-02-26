@@ -1,11 +1,16 @@
 package com.example.SpringEmployeePayrollApp.service;
 
+import com.example.SpringEmployeePayrollApp.dto.EmployeeDTO;
+import lombok.extern.slf4j.Slf4j;
 import com.example.SpringEmployeePayrollApp.model.Employee;
 import com.example.SpringEmployeePayrollApp.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j  // Lombok annotation for logging
 @Service
 public class EmployeeService {
     @Autowired
@@ -15,9 +20,21 @@ public class EmployeeService {
         return repository.save(employee);
     }
 
-    public List<Employee> getAllEmployees() {
-        return repository.findAll();
+    public Employee addEmployee(EmployeeDTO employeeDTO) {
+        Employee employee = new Employee();
+        employee.setId((long) (repository.count() + 1)); // Dummy ID generation
+        employee.setName(employeeDTO.getName());
+        employee.setSalary(employeeDTO.getSalary());
+
+        repository.save(employee);
+
+        log.info("Employee Added: {}", employee); // Logging the new employee
+        return employee;
     }
+
+//    public List<Employee> getAllEmployees() {
+//        return repository.findAll();
+//    }
 
     public void deleteEmployee(Long id){
         List<Employee>emp=repository.findAll();
@@ -26,5 +43,13 @@ public class EmployeeService {
                 repository.delete(emp.get(i));
             }
         }
+    }
+
+    public List<Employee> getAllEmployees() {
+        List<Employee>employeeList=new ArrayList<>();
+        employeeList=repository.findAll();
+
+        log.info("Fetching all employees. Total: {}", employeeList.size());
+        return employeeList;
     }
 }
