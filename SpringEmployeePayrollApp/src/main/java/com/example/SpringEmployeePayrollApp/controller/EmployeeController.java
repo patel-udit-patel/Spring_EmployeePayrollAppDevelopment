@@ -4,6 +4,7 @@ import com.example.SpringEmployeePayrollApp.model.Employee;
 import com.example.SpringEmployeePayrollApp.dto.EmployeeDTO;
 import com.example.SpringEmployeePayrollApp.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
@@ -50,5 +51,12 @@ public class EmployeeController {
     public List<Employee> getEmployee() {
         // Retrieve employee details
         return service.getAllEmployees();
+    }
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Employee> getEmployee(@PathVariable Long id) {
+        Employee employee = service.getEmployeeById(id);
+        return ResponseEntity.ok(employee);
     }
 }

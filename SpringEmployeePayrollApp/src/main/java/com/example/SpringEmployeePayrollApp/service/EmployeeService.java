@@ -1,6 +1,7 @@
 package com.example.SpringEmployeePayrollApp.service;
 
 import com.example.SpringEmployeePayrollApp.dto.EmployeeDTO;
+import com.example.SpringEmployeePayrollApp.exception.EmployeeNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import com.example.SpringEmployeePayrollApp.model.Employee;
 import com.example.SpringEmployeePayrollApp.repository.EmployeeRepository;
@@ -52,5 +53,11 @@ public class EmployeeService {
 
         log.info("Fetching all employees. Total: {}", employeeList.size());
         return employeeList;
+    }
+
+    public Employee getEmployeeById(Long id) {
+        log.info("Fetching Employee with ID: {}", id);
+        return repository.findById(id)
+                .orElseThrow(() -> new EmployeeNotFoundException(id));
     }
 }
